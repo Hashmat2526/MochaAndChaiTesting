@@ -1,5 +1,6 @@
 var expect = require("chai").expect;
 var tools = require("../lib/tools");
+var nock = require("nock");
 
 describe("tools", function() {
   describe("printName()", function() {
@@ -10,7 +11,14 @@ describe("tools", function() {
   });
 
   describe("loadWiki()", function() {
-    this.timeout(3000);
+    this.timeout(5000);
+
+    // before(function() {
+    //   nock("https://en.wikipedia.org")
+    //     .get("/wiki/Muhammad_Ilyas_Qadri")
+    //     .reply(200, "mock the page");
+    // });
+
     it("Load Muhammad Ilyas Qadri's Wiki Page", function(done) {
       tools.loadWiki(
         { first: "Muhammad", mid: "Ilyas", last: "Qadri" },
