@@ -11,23 +11,21 @@ describe("tools", function() {
   });
 
   describe("loadWiki()", function() {
-    this.timeout(5000);
+    // this.timeout(5000);
 
-    // before(function() {
-    //   nock("https://en.wikipedia.org")
-    //     .get("/wiki/Muhammad_Ilyas_Qadri")
-    //     .reply(200, "mock the page");
-    // });
+    before(function() {
+      nock("https://en.wikipedia.org")
+        .log(console.log)
+        .get("/wiki/Abraham_Lincoln")
+        .reply(200, "mock the page");
+    });
 
-    it("Load Muhammad Ilyas Qadri's Wiki Page", function(done) {
-      tools.loadWiki(
-        { first: "Muhammad", mid: "Ilyas", last: "Qadri" },
-        function(html) {
-          console.log("passeddddddddd");
-          expect(html).to.be.ok;
-          done();
-        }
-      );
+    it("Load Abraham Lincoln's Wiki Page", function(done) {
+      tools.loadWiki({ first: "Abraham", mid: "Lincoln" }, function(html) {
+        console.log("passeddddddddd");
+        expect(html).to.equal("mock the page");
+        done();
+      });
     });
   });
 });
