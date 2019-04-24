@@ -6,21 +6,17 @@ var sinon = require("sinon");
 describe("Ordering Items", function() {
   beforeEach(function() {
     this.testData = [
-      { sku: "AAB", qty: 10 },
+      { sku: "AAA", qty: 10 },
       { sku: "BBB", qty: 0 },
       { sku: "CCC", qty: 3 }
     ];
 
-    // this.console = {
-    //   log: sinon.spy()
-    // };
-    // console.log(this.console);
-    // order.__set__("console", {
-    //   log: function(val) {
-    //     console.log(val);
-    //   }
-    // });
+    this.console = {
+      log: sinon.spy()
+    };
     order.__set__("inventoryData", this.testData);
+
+    order.__set__("console", this.console);
   });
   it("order an item when there are enough in stock", function(done) {
     var _this = this;
